@@ -1,11 +1,12 @@
 var webpack = require('webpack');
 var resolve = require('path').resolve;
+var join    = require('path').join;
 
 module.exports = {
-	context: resolve('src'),
+	context: join(__dirname, 'src'),
 	entry: './app.js',
 	output: {
-		path: './dist',
+		path: join(__dirname, 'dist'),
 		filename: 'bundle.js'
 	},
 	resolve: {
@@ -19,7 +20,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
-				exclude: 'node_modules'
+				exclude: join(__dirname, 'node_modules')
 			}
 		]
 	}

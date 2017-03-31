@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { render }           from 'react-dom';
 import HelloWorld           from 'components/hello-world';
+import List                 from 'components/list';
 
-render(<HelloWorld />, document.getElementById('container'));
+render(
+	<div>
+		<List />
+	</div>
+	, document.getElementById('container'));

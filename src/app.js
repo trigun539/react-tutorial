@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
-import { render }           from 'react-dom';
-import App                  from 'components/app';
+import React           from 'react';
+import { Provider }    from 'react-redux';
+import { createStore } from 'redux';
+import { render }      from 'react-dom';
+import App             from 'components/app';
+import Reducers        from 'reducers';
 
-const theTodos = [
-	{ id: 1, text: 'Learn react', done: false },
-	{ id: 2, text: 'Learn JS', done: false }
-];
+// Store
+let store = createStore(Reducers);
+
+window.store = store;
 
 render(
-	<App
-		todos={ theTodos } />
+	<Provider store={store} >
+		<App />
+	</Provider>
 	, document.getElementById('container'));

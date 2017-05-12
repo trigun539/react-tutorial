@@ -1,32 +1,14 @@
 import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+import { addTodo }          from 'actions';
 
-export default class App extends Component {
-
-	constructor (props) {
-		super(props);
-
-		this.state = {
-			todos: props.todos
-		};
-	}
-
-	addHandler (newTodo) {
-		this.setState({
-			todos: [
-				...this.state.todos,
-				{
-					id: this.state.todos.length + 1,
-					text: newTodo,
-					done: false
-				}
-			]
-		});
-	}
+export class App extends Component {
 
 	render () {
-		const { todos } = this.state;
-		const listItems = todos.map(x => {
-			return <li key={x.id}>{x.text}</li>;
+		const { todos, addTodo } = this.props;
+
+		const listItems = todos.map((x, i) => {
+			return <li key={ i }>{x.text}</li>;
 		});
 
 		return (
@@ -37,10 +19,27 @@ export default class App extends Component {
 				</ul>
 				<input id="theInput" ref="input" type="text" placeholder="Add Todo" />
 				<button onClick={ () => {
-					this.addHandler(this.refs.input.value);
+					addTodo({ text: this.refs.input.value });
 				}}>Add Todo</button>
 			</div>
 		);
 	}
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addTodo (todo) { dispatch(addTodo(todo)); }
+	}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

@@ -23,5 +23,6 @@ module.exports = {
 				exclude: join(__dirname, 'node_modules')
 			}
 		]
-	}
+	},
+	devtool: '#eval-inline-source'
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import { addTodo }          from 'actions';
+import CustomComponent      from './custom-component';
 
 export class App extends Component {
 
@@ -21,6 +22,9 @@ export class App extends Component {
 				<button onClick={ () => {
 					addTodo({ text: this.refs.input.value });
 				}}>Add Todo</button>
+				
+				<CustomComponent name="Edwin Perez as prop" />
+
 			</div>
 		);
 	}

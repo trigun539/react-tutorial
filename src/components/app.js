@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import { addTodo }          from 'actions';
 import CustomComponent      from './custom-component';
+import ListItem             from './list-item';
 
 export class App extends Component {
 
@@ -9,7 +10,7 @@ export class App extends Component {
 		const { todos, addTodo } = this.props;
 
 		const listItems = todos.map((x, i) => {
-			return <li key={ i }>{x.text}</li>;
+			return <ListItem key={ i } text={ x.text } />;
 		});
 
 		return (
@@ -22,8 +23,6 @@ export class App extends Component {
 				<button onClick={ () => {
 					addTodo({ text: this.refs.input.value });
 				}}>Add Todo</button>
-				
-				<CustomComponent name="Edwin Perez as prop" />
 
 			</div>
 		);

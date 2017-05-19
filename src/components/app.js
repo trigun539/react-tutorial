@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { addTodo }          from 'actions';
+import { addTodo, toggleTodo }          from 'actions';
 import CustomComponent      from './custom-component';
 import ListItem             from './list-item';
 
 export class App extends Component {
 
 	render () {
-		const { todos, addTodo } = this.props;
+		const { todos, addTodo, toggleTodo } = this.props;
 
 		const listItems = todos.map((x, i) => {
-			return <ListItem key={ i } text={ x.text } />;
+			return <ListItem key={ i } text={ x.text } done={ x.done } action={ () => { toggleTodo(x); }} />;
 		});
 
 		return (
@@ -38,7 +38,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addTodo (todo) { dispatch(addTodo(todo)); }
+		addTodo (todo) { dispatch(addTodo(todo)); },
+		toggleTodo (todo) { dispatch(toggleTodo(todo)); }
 	}
 }
 

@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import {
 	ADD_TODO,
-	RESET_TODOS
+	RESET_TODOS,
+	TOGGLE_TODO
 } from 'actions';
 
 const initialState = [];
@@ -11,8 +12,23 @@ export const todos = (state = initialState, action) => {
 		case ADD_TODO:
 			return [
 				...state,
-				action.todo
+				{ text: action.todo.text, done: false }
 			];
+		case TOGGLE_TODO:
+			const newTodos = [];
+
+			state.forEach(todo => {
+				if (todo.text === action.todo.text) {
+					newTodos.push({
+						text: todo.text,
+						done: !todo.done
+					});
+				} else {
+					newTodos.push({ ...todo });
+				}
+			});
+
+			return newTodos;
 		case RESET_TODOS:
 			return [];
 		default:

@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 class ListItem extends Component {
 
 	render () {
-		const { text } = this.props;
-
+		const { text, done, action } = this.props;
+		const style = {
+			textDecoration: done ? "line-through" : "none"
+		};
+		
 		return (
-			<li>
+			<li style={ style }>
 				{ text }
-				<input type="checkbox" />
+				<input type="checkbox" onClick={ action } />
 			</li>
 		);
 	}
